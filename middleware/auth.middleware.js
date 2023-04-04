@@ -17,10 +17,8 @@ let authMiddleware = (req, res, next) => {
       return res.status(403).json({ info: "Unauthorized", type: "error" });
     } else {
       // check whether user is flagged
-      let user = await User.findOne({ _id: decoded.id });
-      if (user?.isflagged) {
-        return res.status(403).json({ info: "Unautherized", type: "error" });
-      }
+      let user  = await User.findOne({ _id: decoded.id });
+     
       req.userId = decoded.id;
       req.user = user;
 
