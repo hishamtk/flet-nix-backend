@@ -68,13 +68,15 @@ let getAllMovieController = async (req, res) => {
     const count = await Movie.countDocuments(query);
     let skip = (page - 1) * limit;
 
-    query.push({ $skip: skip });
-    query.push({ $limit: limit });
+   
     if (sort && order) {
       let sortObje = {};
       sortObje[sort] = order == "asc" ? 1 : -1;
       query.push({ $sort: sortObje });
     }
+    query.push({ $skip: skip });
+    query.push({ $limit: limit });
+
     let movies = await Movie.aggregate(query);
 
     // get total documents in the Movie collection
