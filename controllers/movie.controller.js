@@ -26,7 +26,7 @@ let getAllMovieController = async (req, res) => {
         $project: {
           date_added: {
             $dateFromString: {
-               $toDate: '$date_added'
+               dateString: '$date_added'
             }
          },
           show_id: 1,
